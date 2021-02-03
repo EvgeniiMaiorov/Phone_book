@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'views/index'
+  root to: "views#index"
+  #get 'views/:id', to: 'views#show'
+  #resources :people
+  get 'people/:id', to: 'people#show'
+
 end

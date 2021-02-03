@@ -10,9 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_06_22_205007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "email_addresses", force: :cascade do |t|
+    t.string "value"
+    t.bigint "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_email_addresses_on_person_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["first_name"], name: "index_people_on_first_name"
+    t.index ["last_name"], name: "index_people_on_last_name"
+  end
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string "value"
+    t.bigint "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_phone_numbers_on_person_id"
+  end
+
+  add_foreign_key "email_addresses", "people"
+  add_foreign_key "phone_numbers", "people"
 end
